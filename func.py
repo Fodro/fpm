@@ -58,3 +58,24 @@ def del_member(infile, member):
     member_list = open(infile, mode='w', encoding='utf-8')  # rewrite file
     json.dump(member, member_list)
     member_list.close()
+
+
+def edit(infile, member):
+    ed_mem = input("Enter name of client: ")
+    for i in member:
+        if i['name'] == ed_mem:
+            ed_par = input("Enter attribute to change(name,time,object,cash): ")
+            value = input("Enter new value: ")
+            if ed_par == "name":
+                i['name'] = value
+            elif ed_par == "time":
+                i['time'] = value
+            elif ed_par == "object":
+                i['object'] = value
+            elif ed_par == "cash":
+                i['cash'] = value
+            else:
+                print("Attribute not found")
+    member_list = open(infile, mode='w', encoding='utf-8')  # rewrite file
+    json.dump(member, member_list)
+    member_list.close()

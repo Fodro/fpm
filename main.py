@@ -7,11 +7,18 @@
 # limitations under the License.
 
 from func import *  # import functions from func.py
+from json import *
 
 members = list()  # create empty list
 infile = 'member_list.json'  # set json file to save
+try:
+    jsfile = open(infile, mode='r', encoding='utf-8')
+    rfile = load(jsfile)
+    members.extend(rfile)
+except FileNotFoundError:
+    pass
 # print some information about program
-print("Fodro's projects manager (FPM) version 0.1")
+print("Fodro's projects manager (FPM) version 0.2")
 print("Written by Fodro <feodor.tomilov@gmail>")
 while True:  # create main cycle
     cmd = input(":")  # setup command line
@@ -27,6 +34,8 @@ while True:  # create main cycle
         del_member(infile, members)
     elif cmd == 'help':
         print("exit - exit program\nadd - add project\nlist - print list of projects")
-        print("del - delete project\nhelp - print list of commands")
+        print("del - delete project\nhelp - print list of commands\nedit - edit attribute of project")
+    elif cmd == 'edit':
+        edit(infile, members)
     else:
         print("Error: command not found. Type help to print list of commands")
