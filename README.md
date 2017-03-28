@@ -1,3 +1,2 @@
 # fpm
-Fodro's project manager
-It can help you to manage projects.
+Fodro's project manager is tool to manage your projects.
