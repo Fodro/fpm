@@ -1,4 +1,4 @@
-# Copyright 2017 Fodro
+# Copyright 2017-2020 Fodro
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
 # in compliance with the License. You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 # Unless required by applicable law or agreed to in writing, software distributed under the License is
@@ -16,25 +16,30 @@ try:
     rfile = load(jsfile)
     members.extend(rfile)
 except FileNotFoundError:
-    pass
+    jsfile = open(infile, mode='w', encoding='utf-8')
+except JSONDecodeError:
+    jsfile = open(infile, mode='w', encoding='utf-8')
 # print some information about program
-print("Fodro's projects manager (FPM) version 0.2")
+print("Fodro's projects manager (FPM) version 0.3")
 print("Written by Fodro <feodor.tomilov@gmail>")
 while True:  # create main cycle
-    cmd = input(":")  # setup command line
-    if cmd == 'exit':  # setup exit
+    cmd = input(": ")  # command line
+    if cmd == 'exit':  # exit
         break
     elif cmd == 'add':  # add project
-        member = create_member()  # call function create_member()
-        members.append(member)  # append dictionary "member" to list "members"
+        member = create_member()
+        members.append(member)
         save_by_json(infile, members)  # save list "members" to json file
     elif cmd == 'list':  # print list of projects
-        list_members(infile)  # call list_members function
+        try:
+            list_members(infile)
+        except JSONDecodeError:
+            print("Empty")
     elif cmd == 'del':  # delete member from file
         del_member(infile, members)
     elif cmd == 'help':
-        print("exit - exit program\nadd - add project\nlist - print list of projects")
-        print("del - delete project\nhelp - print list of commands\nedit - edit attribute of project")
+        print("exit - exit program\nadd - add project\nlist - print list of projects\ndel - delete project\nhelp - "
+              "print list of commands\nedit - edit attribute of project")
     elif cmd == 'edit':
         edit(infile, members)
     else:
