@@ -1,2 +1,2 @@
 # fpm
-Fodro's project manager is tool to manage your projects.
+Fodro's project manager is an another tool to manage orders
